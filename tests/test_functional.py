@@ -17,7 +17,7 @@ class NewVisitorTest(unittest.TestCase):
 
         # She notices the page title and header mention to-do lists
         self.assertIn('To-Do', self.browser.title)
-        self.fail('Finish the test!')
+        # self.fail('Finish the test!')
 
         # She is invited to enter a to-do item straight away
         # She types "Buy peacock feathers" into a text box
@@ -40,6 +40,6 @@ class NewVisitorTest(unittest.TestCase):
         # She visits that URL - her to-do list is still there.
 
         # Satisfied, she goes back to sleep
-if __name__ == '__main__':
-    unittest.main()
+# if __name__ == '__main__':
+#     unittest.main()
 
