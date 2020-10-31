@@ -15,8 +15,31 @@ class HomePageTest(TestCase):
     
     def test_can_save_a_POST_request(self):
         response = self.client.post('/', data={'item_text': 'A new list item'})
-        assert 'A new list item' in response.content.decode()
-        self.assertTemplateUsed(response, 'home.html')
+        
+        assert Item.objects.count() == 1
+        new_item = Item.objects.first()
+        assert new_item.text == 'A new list item'
+
+    
+    def test_redirects_after_POST(self):
+        response = self.client.post('/', data={'item_text': 'A new list item'})
+        assert response.status_code == 302
+        assert response['location'] == '/'
+
+    
+    def test_only_saves_items_when_necessary(self):
+        self.client.get('/')
+        assert Item.objects.count() == 0
+
+    
+    def test_displays_all_list_items(self):
+        Item.objects.create(text='itemy 1')
+        Item.objects.create(text='itemy 2')
+
+        response = self.client.get('/')
+
+        assert 'itemy 1' in response.content.decode()
+        assert 'itemy 2' in response.content.decode()
     
 
 class ItemModeTest(TestCase):
@@ -37,3 +60,5 @@ class ItemModeTest(TestCase):
         second_saved_item = saved_items[1]
         assert first_saved_item.text == 'The first (ever) list item'
         assert second_saved_item.text == 'Item the second'
+
+    
