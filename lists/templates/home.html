@@ -1,3 +1,19 @@
-<html>
-    <title>To-Do lists</title>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>To-Do lists</title>
+        <link
+            rel="shortcut icon"
+            type="image/png"
+            href="{% static 'favicon.png' %}"
+        />
+    </head>
+    <body>
+        <h1>Your To-Do list</h1>
+        <input placeholder="Enter a to-do item" type="text" id="id_new_item" />
+        <table id="id_list_table"></table>
+    </body>
 </html>
