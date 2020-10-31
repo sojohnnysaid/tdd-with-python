@@ -1,5 +1,5 @@
-from selenium import webdriver
 import unittest
+from selenium import webdriver
 
 
 class NewVisitorTest(unittest.TestCase):
@@ -40,6 +40,6 @@ class NewVisitorTest(unittest.TestCase):
         # She visits that URL - her to-do list is still there.
 
         # Satisfied, she goes back to sleep
-# if __name__ == '__main__':
-#     unittest.main()
 
+if __name__ == '__main__':
+    unittest.main()
