@@ -11,9 +11,10 @@ MAX_WAIT = 10
 class FunctionalTest(StaticLiveServerTestCase):
 
     def setUp(self):
-        opts = Options()
-        opts.add_argument('--headless')
-        self.browser = webdriver.Chrome(options=opts)
+        #opts = Options()
+        #opts.add_argument('--headless')
+        #self.browser = webdriver.Chrome(options=opts)
+        self.browser = webdriver.Firefox()
 
     def tearDown(self):
         self.browser.quit()
@@ -90,10 +91,8 @@ class NewVisitorTest(FunctionalTest):
 
         ## we use a new browser session to make sure that no information
         ## of Edith's is coming through from cookies etc
-        self.browser.quit()
-        opts = Options()
-        opts.add_argument('--headless')
-        self.browser = webdriver.Chrome(options=opts)
+        self.tearDown()
+        self.setUp()
 
         # Francis visits the home page.
         # There is no sign of Edith's list
