@@ -2,6 +2,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium import webdriver
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium.common.exceptions import WebDriverException
+from selenium.webdriver.chrome.options import Options
 from unittest import skip
 import time
 
@@ -10,7 +11,9 @@ MAX_WAIT = 10
 class FunctionalTest(StaticLiveServerTestCase):
 
     def setUp(self):
-        self.browser = webdriver.Chrome()
+        opts = Options()
+        opts.add_argument('--headless')
+        self.browser = webdriver.Chrome(options=opts)
 
     def tearDown(self):
         self.browser.quit()
@@ -88,7 +91,9 @@ class NewVisitorTest(FunctionalTest):
         ## we use a new browser session to make sure that no information
         ## of Edith's is coming through from cookies etc
         self.browser.quit()
-        self.browser = webdriver.Firefox()
+        opts = Options()
+        opts.add_argument('--headless')
+        self.browser = webdriver.Chrome(options=opts)
 
         # Francis visits the home page.
         # There is no sign of Edith's list
