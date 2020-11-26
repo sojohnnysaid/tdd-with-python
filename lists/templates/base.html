@@ -14,7 +14,7 @@
       <div class="navbar">
         {% if user.is_authenticated %}
           <p>Logged in as {{ user.email }}</p>
-          <p><a href="{% url 'logout' %}" id="id_logout"></a></p>
+          <p><a href="{% url 'logout' %}" id="id_logout">Log out</a></p>
         {% else %}
           <form action="{% url 'send_login_email' %}" method="post">
             Enter email to login: <input type="text" name="email">
