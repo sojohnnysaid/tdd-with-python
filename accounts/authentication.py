@@ -5,7 +5,6 @@ from accounts.models import User, Token
 class PasswordlessAuthenticationBackend(ModelBackend):
     
     def authenticate(self, uid, request=None):
-        print('i was called')
         token = None
         try:
             token= Token.objects.get(uid=uid)
@@ -16,7 +15,6 @@ class PasswordlessAuthenticationBackend(ModelBackend):
             return None
 
     def get_user(self, email):
-        print('i was called too')
         try:
             return User.objects.get(email=email)
         except User.DoesNotExist:
