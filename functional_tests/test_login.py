@@ -10,7 +10,7 @@ SUBJECT = 'Your login link for Superlists'
 class LoginTest(FunctionalTest):
 
     def test_can_get_email_link_to_log_in(self):
-        # Edit goes to the awesome superlists site
+        # Edith goes to the awesome superlists site
         # and notices a "Log in" section in the navbar for the first time
         # It's telling her to enter her email address, so she does
         self.browser.get(self.live_server_url)
@@ -40,19 +40,10 @@ class LoginTest(FunctionalTest):
         self.browser.get(url)
 
         # she is logged in!
-        self.wait_for(
-            lambda: self.browser.find_element_by_link_text('Log out')
-        )
-        navbar = self.browser.find_element_by_css_selector('.navbar')
-        self.assertIn(TEST_EMAIL, navbar.text)
+        self.wait_to_be_logged_in(email=TEST_EMAIL)
 
         # Now she logs out
         self.browser.find_element_by_link_text('Log out').click()
 
         # She is logged out
-        self.wait_for(
-            lambda: self.browser.find_element_by_name('email')
-        )
-
-        navbar = self.browser.find_element_by_css_selector('.navbar')
-        self.assertNotIn(TEST_EMAIL, navbar.text)
+        self.wait_to_be_logged_out(email=TEST_EMAIL)
